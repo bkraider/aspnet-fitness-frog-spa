@@ -16,7 +16,7 @@ namespace Treehouse.FitnessFrog.Shared.Models
         }
 
         /// <summary>
-        /// The ID of the activity.
+        /// The ID of the activity 2
         /// </summary>
         public int Id { get; set; }
 
