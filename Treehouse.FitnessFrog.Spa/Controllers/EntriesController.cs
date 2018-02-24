@@ -27,17 +27,18 @@ namespace Treehouse.FitnessFrog.Spa.Controllers
             return null;
         }
 
-        public void Put()
+        public void Post(Entry entry)
         {
 
         }
 
-        public void Post()
+        public void Put(int id, Entry entry)
         {
 
         }
 
-        public void Delete()
+
+        public void Delete(int id)
         {
 
         }
