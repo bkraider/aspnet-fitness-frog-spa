@@ -1,12 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
+﻿using AutoMapper;
 using System.Web.Http;
 using Treehouse.FitnessFrog.Shared.Data;
 using Treehouse.FitnessFrog.Shared.Models;
-using Treehouse.FitnessFrog.Spa.Dto;
+
 
 namespace Treehouse.FitnessFrog.Spa.Controllers
 {
@@ -38,37 +34,39 @@ namespace Treehouse.FitnessFrog.Spa.Controllers
             return Ok(entry);
         }
 
-        public IHttpActionResult Post(EntryDto entry)
+        public IHttpActionResult Post(EntryDto entrydto)
         {
 
-            ValidateEntry(entry);
+            ValidateEntry(entrydto);
 
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            var entryModel = entry.ToModel();
+            var entry = Mapper.Map<Entry>(entrydto);
 
-            _entriesRepository.Add(entryModel);
+            _entriesRepository.Add(entry);
 
-            entry.Id = entryModel.Id;
+            entrydto.Id = entry.Id;
 
             return Created(
-                Url.Link("DefaultApi", new { controller = "Entries", id = entry.Id }),
-                entry);
+                Url.Link("DefaultApi", new { controller = "Entries", id = entrydto.Id }),
+                entrydto);
         }
 
-        public IHttpActionResult Put(int id, EntryDto entry)
+        public IHttpActionResult Put(int id, EntryDto entrydto)
         {
-            ValidateEntry(entry);
+            ValidateEntry(entrydto);
 
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            _entriesRepository.Update(entry.ToModel());
+            var entry = Mapper.Map<Entry>(entrydto);
+
+            _entriesRepository.Update(entry);
 
             return StatusCode(System.Net.HttpStatusCode.NoContent);
         }

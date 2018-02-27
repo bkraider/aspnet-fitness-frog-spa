@@ -1,11 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 using Treehouse.FitnessFrog.Shared.Models;
 
-namespace Treehouse.FitnessFrog.Spa.Dto
+namespace Treehouse.FitnessFrog.Spa
 {
     public class EntryDto
     {
@@ -28,18 +25,5 @@ namespace Treehouse.FitnessFrog.Spa.Dto
         [MaxLength(200, ErrorMessage = "The Notes field cannot be longer than 200 characters.")]
         public string Notes { get; set; }
 
-        public Entry ToModel()
-        {
-            return new Entry()
-            {
-                Id = Id,
-                Date = Date.Value,
-                ActivityId = ActivityId.Value,
-                Duration = Duration.Value,
-                Intensity = Intensity.Value,
-                Exclude = Exclude,
-                Notes = Notes
-            };
-        }
     }
 }

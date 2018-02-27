@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Http;
-using Newtonsoft;
+﻿using System.Web.Http;
 using Newtonsoft.Json.Serialization;
+
 
 namespace Treehouse.FitnessFrog.Spa
 {
@@ -12,7 +8,6 @@ namespace Treehouse.FitnessFrog.Spa
     {
         public static void Register(HttpConfiguration config)
         {
-
             var jsonSerializerSettings =
                 config.Formatters.JsonFormatter.SerializerSettings;
             jsonSerializerSettings.ReferenceLoopHandling =
@@ -24,6 +19,9 @@ namespace Treehouse.FitnessFrog.Spa
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional });
+
+            AutoMapperConfig.Initialize();
+
         }
 
     }
